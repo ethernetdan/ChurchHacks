@@ -9,8 +9,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import <Braintree/Braintree.h>
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) Braintree *braintree;
 
 @end
