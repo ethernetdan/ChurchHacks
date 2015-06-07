@@ -4,6 +4,7 @@ var React = require('react-native');
 var {
   StyleSheet,
   Text,
+  TextInput,
   View,
 } = React;
 
@@ -20,28 +21,25 @@ var styles = StyleSheet.create({
 });
 
 
-var Splash = React.createClass({
+var Login = React.createClass({
   render: function() {
     return (
       <View style={styles.view}>
-        <Button style={styles.button} onPress={this._auth}>
-          log in
-        </Button>
-        <Button style={styles.button} onPress={this._auth}>
-          sign up
+        <Button style={styles.button} onPress={this._next}>
+          braintree login stuff!
         </Button>
       </View>
     );
   },
 
-  _auth: function() {
+  _next: function() {
     this.props.toRoute({
-      name: 'Login',
-      component: require('./Login.js'),
+      name: 'QRScanner',
+      component: require('./QRScanner.js'),
     });
   },
 });
 
 
-module.exports = Splash;
+module.exports = Login;
 

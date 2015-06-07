@@ -17,7 +17,7 @@ var QRCodeScreen = React.createClass({
   propTypes: {
     cancelButtonVisible: React.PropTypes.bool,
     cancelButtonTitle: React.PropTypes.string,
-    onSucess: React.PropTypes.func,
+    onSuccess: React.PropTypes.func,
     onCancel: React.PropTypes.func,
   },
 
@@ -47,8 +47,8 @@ var QRCodeScreen = React.createClass({
 
       setTimeout(function() {
         VibrationIOS.vibrate();
+        $this.props.onSuccess(result.data);
         $this.props.navigator.pop();
-        $this.props.onSucess(result.data);
       }, 1000);
     }
   },
