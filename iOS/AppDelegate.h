@@ -14,6 +14,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) Braintree *braintree;
+
+- (void) executePayment: (double)amount qr:(NSString*)qr;
 
 @end
