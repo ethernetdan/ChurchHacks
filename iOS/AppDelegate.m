@@ -11,12 +11,19 @@
 
 #import "RCTRootView.h"
 
+#import "HockeySDK.h"
+
 #import "BTViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"e15c4d038726e7345ba4899ef448caf7"];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator
+     authenticateInstallation];
+
   NSURL *jsCodeLocation;
 
   /**
@@ -33,7 +40,7 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+  jsCodeLocation = [NSURL URLWithString:@"http://10.0.0.6:8081/index.ios.bundle"];
 
   /**
    * OPTION 2

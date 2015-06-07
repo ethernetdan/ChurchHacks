@@ -8,46 +8,35 @@ var React = require('react-native');
 var {
   AppRegistry,
   StyleSheet,
-  Text,
-  View,
 } = React;
+
+var Router = require('react-native-router');
+
+var Splash = require('./ChurchHacks/Splash.js');
+var QRScanner = require('./ChurchHacks/QRScanner.js');
+
+
+var splashRoute = { name: 'Splash', component: Splash };
+var qrScannerRoute = { name: 'QRScanner', component: QRScanner };
+
+var styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#59bee3',
+  },
+});
+
 
 var ChurchHacks = React.createClass({
   render: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Router
+        headerStyle={styles.header}
+        firstRoute={splashRoute}
+      />
     );
   }
 });
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('ChurchHacks', () => ChurchHacks);
+

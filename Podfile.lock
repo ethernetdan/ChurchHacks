@@ -31,12 +31,15 @@ PODS:
   - Braintree/Venmo (3.8.1):
     - Braintree/API
   - coinbase-official/OAuth (2.1.4)
+  - HockeySDK (3.6.4)
 
 DEPENDENCIES:
   - Braintree
+  - HockeySDK (~> 3.6.4)
 
 SPEC CHECKSUMS:
   Braintree: 6c27eb7ad730538a5cc7f6c48ac4d07a42227603
   coinbase-official: 4ad3ac862840657b4184345eb84af8166ab2b04e
+  HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
 
 COCOAPODS: 0.37.2
