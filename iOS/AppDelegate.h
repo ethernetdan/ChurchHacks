@@ -9,8 +9,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import <Braintree/Braintree.h>
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+
+- (void) executePayment: (double)amount qr:(NSString*)qr;
 
 @end

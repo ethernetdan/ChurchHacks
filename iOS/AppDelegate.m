@@ -13,6 +13,7 @@
 
 #import "HockeySDK.h"
 
+#import "BTViewController.h"
 
 @implementation AppDelegate
 
@@ -62,7 +63,50 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  /**
+   * Braintree client setup
+   */
+  [Braintree setReturnURLScheme:@"church.basket.ChurchHacks.payments"];
   return YES;
 }
 
+/*
+ * Finalize Braintree payment
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [Braintree handleOpenURL:url sourceApplication:sourceApplication];
+}
+
+- (NSString*) getProperty:(NSString*) key {
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"settings" ofType:@"plist"];
+  NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
+  return dictionary[key];
+}
+
+- (void) openModal:(Braintree*) client amount:(double)amount qr:(NSString*)qr {
+  UINavigationController *c = [BTViewController go:client];
+  self.window.rootViewController = c;
+  [self.window makeKeyAndVisible];
+}
+
+- (void) executePayment:(double)amount qr:(NSString*)qr {
+  NSString *url = [self getProperty:@"tokenUrl"];
+  NSURL *tokenURL = [NSURL URLWithString:url];
+  NSMutableURLRequest *clientTokenRequest =[NSMutableURLRequest requestWithURL:tokenURL];
+  
+  [NSURLConnection
+   sendAsynchronousRequest:clientTokenRequest
+   queue:[NSOperationQueue mainQueue]
+   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+     NSString *clientToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+     Braintree *braintree = [Braintree braintreeWithClientToken:clientToken];
+     [self openModal:braintree amount:amount qr:qr];
+   }];
+}
+
+
+
+
 @end
+
